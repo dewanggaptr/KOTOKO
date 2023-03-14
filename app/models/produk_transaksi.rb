@@ -1,0 +1,2 @@
+class ProdukTransaksi < ApplicationRecord
+end
