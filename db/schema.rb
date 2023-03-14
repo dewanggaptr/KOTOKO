@@ -14,43 +14,42 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_14_081131) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "kasirs", force: :cascade do |t|
-    t.string "nama"
+  create_table "cashiers", force: :cascade do |t|
+    t.string "name"
     t.string "email"
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "kategoris", force: :cascade do |t|
-    t.string "nama_kategori"
-    t.text "deskripsi"
+  create_table "categorys", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "produk_transaksis", force: :cascade do |t|
-    t.integer "total"
+  create_table "product_transactions", force: :cascade do |t|
+    t.integer "quantity"
     t.integer "discount"
-    t.integer "produk_id"
-    t.integer "transaksi_id"
+    t.integer "price"
+    t.integer "product_id"
+    t.integer "transaction_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "produks", force: :cascade do |t|
-    t.string "nama_produk"
-    t.text "deskripsi_produk"
-    t.integer "harga"
-    t.integer "stok"
-    t.integer "kategori_id"
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "price"
+    t.integer "stock"
+    t.integer "category_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "transaksis", force: :cascade do |t|
-    t.integer "jumlah_barang"
-    t.integer "kasir_id"
+  create_table "transactions", force: :cascade do |t|
+    t.integer "cashier_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
