@@ -3,7 +3,7 @@ class CreateKasirs < ActiveRecord::Migration[7.0]
     create_table :kasirs do |t|
       t.string :nama
       t.string :email
-      t.string :password
+      t.string :password_digest
 
 
       t.timestamps
