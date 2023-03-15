@@ -7,6 +7,9 @@ Rails.application.routes.draw do
   namespace :api do
     resources :transactions
     resources :product_transacs
+    resources :cashiers
+    resources :category
+    resources :products
     # post "/login", to: "users#login"
   end
 end
