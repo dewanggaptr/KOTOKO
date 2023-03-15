@@ -14,6 +14,12 @@ gem "puma", "~> 5.0"
 
 gem 'rails_admin'
 
+gem 'jwt'
+
+gem 'dotenv'
+
+gem 'faker'
+
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
