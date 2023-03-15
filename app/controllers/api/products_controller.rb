@@ -1,0 +1,46 @@
+class Api::ProductsController < ApplicationController
+  before_action :set_product, only: [:show, :update, :destroy]
+
+  def index
+    @product = Product.all
+
+        render json: @product.map { |product| product.new_attributes}
+  end
+
+  def show
+    render json: @product.new_attributes
+  end
+
+  def create
+    @product = Product.new(product_params)
+
+    if @product.save
+      render json: @product.new_attributes, status: 201
+    else
+      render json: @product.errors, status: 422
+    end
+  end
+
+  def update
+   if @product.update(product_params)
+     render json: @product.new_attributes
+   else
+     render json: @product.errors, status: 422
+   end
+  end
+
+  def destroy
+    @product.destroy
+  end
+
+  def set_product
+    @product = Product.find_by_id(params[:id])
+      if @product.nil?
+        render json: {error: "user not found"}, status: 404
+      end
+  end
+
+  def product_params
+   params.require(:product).permit(:name, :description, :price, :stock, :category_id)
+  end
+end
