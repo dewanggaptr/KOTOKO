@@ -1,6 +1,6 @@
 class Transaction < ApplicationRecord
-  has_many :product_transacs
-  has_many :products, through: :product_transac, source: :product
+  has_many :our_transactions, class_name: 'ProductTransac', foreign_key: 'transaction_id'
+  has_many :products, through: :our_transactions, source: :our_product
   belongs_to :cashier
 
   validates :cashier_id, presence: true

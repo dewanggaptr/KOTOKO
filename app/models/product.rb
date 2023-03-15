@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
-  has_many :product_transacs
-  has_many :transactions, through: :product_transac, source: :transaction
+  has_many :our_products, class_name: 'ProductTransac', foreign_key: 'product_id'
+  has_many :transactions, through: :our_products, source: :our_transaction
   belongs_to :category
 
   validates :name, presence: true, length: { maximum: 50 }
