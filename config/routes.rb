@@ -4,4 +4,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  namespace :api do
+    resources :transactions
+    resources :product_transacs
+    # post "/login", to: "users#login"
+  end
 end
