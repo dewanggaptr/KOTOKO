@@ -2,9 +2,9 @@ class Api::CategoryController < ApplicationController
   before_action :set_category, only: [:show, :update, :destroy]
 
   def index
-    @category = Category.all
+    @categories = Category.all
 
-    render json: @category.map { |category| category.new_attributes}
+    render json: @categories.map { |category| category.new_attributes}
   end
 
   def show
@@ -32,10 +32,11 @@ class Api::CategoryController < ApplicationController
     @category.destroy
   end
 
+  private
   def set_category
     @category = Category.find_by_id(params[:id])
     if @category.nil?
-      render json: {error: "user not found"}, status: 404
+      render json: { error: "Category not found" }, status: 404
     end
   end
 

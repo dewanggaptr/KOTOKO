@@ -2,9 +2,9 @@ class Api::ProductsController < ApplicationController
   before_action :set_product, only: [:show, :update, :destroy]
 
   def index
-    @product = Product.all
+    @products = Product.all
 
-        render json: @product.map { |product| product.new_attributes}
+    render json: @products.map { |product| product.new_attributes}
   end
 
   def show
@@ -22,25 +22,26 @@ class Api::ProductsController < ApplicationController
   end
 
   def update
-   if @product.update(product_params)
-     render json: @product.new_attributes
-   else
-     render json: @product.errors, status: 422
-   end
+    if @product.update(product_params)
+      render json: @product.new_attributes
+    else
+      render json: @product.errors, status: 422
+    end
   end
 
   def destroy
     @product.destroy
   end
 
+  private
   def set_product
     @product = Product.find_by_id(params[:id])
       if @product.nil?
-        render json: {error: "user not found"}, status: 404
+        render json: { error: "product not found" }, status: 404
       end
   end
 
   def product_params
-   params.require(:product).permit(:name, :description, :price, :stock, :category_id)
+    params.require(:product).permit(:name, :description, :price, :stock, :category_id)
   end
 end
