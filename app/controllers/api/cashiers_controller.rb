@@ -1,10 +1,11 @@
 class Api::CashiersController < ApplicationController
+  skip_before_action :authenticate_request, only: [:create, :login]
   before_action :set_cashier, only: [:show, :update, :destroy]
 
   def index
-    @cashier = Cashier.all
+    @cashiers = Cashier.all
 
-    render json: @cashier.map { |cashier| cashier.new_attributes }
+    render json: @cashiers.map { |cashier| cashier.new_attributes }
   end
 
   def show
@@ -32,16 +33,28 @@ class Api::CashiersController < ApplicationController
     @cashier.destroy
   end
 
+  def login
+    @cashier = Cashier.find_by(email: params[:email])
+    if @cashier&.authenticate(params[:password])
+      token = JsonWebToken.encode(cashier_id: @cashier.id)
+      render json: {
+        cashier: @cashier.new_attributes,
+        token: token
+      }
+    else
+      render json: { error: "Invalid email or password" }, status: 401
+    end
+  end
+
+  private
   def set_cashier
     @cashier = Cashier.find_by_id(params[:id])
     if @cashier.nil?
-      render json: {error: "user not found"}, status: 404
+      render json: { error: "user not found" }, status: 404
     end
   end
 
   def cashier_params
     params.require(:cashier).permit(:name, :email, :password)
   end
-
-
 end
