@@ -1,4 +1,5 @@
 class Api::CashiersController < ApplicationController
+  skip_before_action :authenticate_request, only: [:create, :login]
   before_action :set_cashier, only: [:show, :update, :destroy]
 
   def index
@@ -30,6 +31,19 @@ class Api::CashiersController < ApplicationController
 
   def destroy
     @cashier.destroy
+  end
+
+  def login
+    @cashier = Cashier.find_by(email: params[:email])
+    if @cashier&.authenticate(params[:password])
+      token = JsonWebToken.encode(cashier_id: @cashier.id)
+      render json: {
+        cashier: @cashier.new_attributes,
+        token: token
+      }
+    else
+      render json: { error: "Invalid email or password" }, status: 401
+    end
   end
 
   private

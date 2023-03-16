@@ -16,7 +16,7 @@ gem 'rails_admin'
 
 gem 'jwt'
 
-gem 'dotenv'
+gem 'dotenv-rails'
 
 gem 'faker'
 

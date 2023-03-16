@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     resources :transactions
     resources :product_transacs
     resources :cashiers
+    post "/login", to: "cashiers#login"
     resources :category
     resources :products
-    # post "/login", to: "users#login"
   end
 end
