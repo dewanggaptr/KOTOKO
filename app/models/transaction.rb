@@ -10,7 +10,12 @@ class Transaction < ApplicationRecord
       id: self.id,
       cashier: self.cashier,
       created_at: self.created_at,
-      updated_at: self.updated_at
+      updated_at: self.updated_at,
+      total: self.total
     }
+  end
+
+  def total
+    self.our_transactions.sum(&:total)
   end
 end
