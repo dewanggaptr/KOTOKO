@@ -36,6 +36,7 @@ class Api::CategoryController < ApplicationController
 
   private
   def set_category
+    
     @category = Category.find_by_id(params[:id])
     if @category.nil?
       render json: { error: "Category not found" }, status: 404

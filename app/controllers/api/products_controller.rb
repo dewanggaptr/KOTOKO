@@ -36,15 +36,6 @@ class Api::ProductsController < ApplicationController
     render json: { success: "Success delete product" }, status: 200
   end
 
-  # def search
-  #   @parameter = params[:search].downcase
-  #   @result = Product.all.where("lower(name) LIKE :search", search: "#{@parameter}")
-
-  #   @result.each do |result|
-  #     result.name
-  #   end
-  # end
-
   private
   def set_product
     @product = Product.find_by_id(params[:id])
