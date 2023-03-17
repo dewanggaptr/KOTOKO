@@ -31,7 +31,7 @@ class Api::CategoryController < ApplicationController
   def destroy
     @category.destroy
 
-    render json: { success: "Success delete transaction" }, status: 200
+    render json: { success: "Success delete category" }, status: 200
   end
 
   private

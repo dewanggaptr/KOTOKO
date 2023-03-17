@@ -33,7 +33,7 @@ class Api::ProductsController < ApplicationController
   def destroy
     @product.destroy
 
-    render json: { success: "Success delete transaction" }, status: 200
+    render json: { success: "Success delete product" }, status: 200
   end
 
   # def search
