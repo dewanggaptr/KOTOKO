@@ -31,6 +31,8 @@ class Api::CashiersController < ApplicationController
 
   def destroy
     @cashier.destroy
+
+    render json: { success: "Success delete cashier" }, status: 200
   end
 
   def login

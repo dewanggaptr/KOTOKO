@@ -15,7 +15,12 @@ class ProductTransac < ApplicationRecord
       discount: self.discount,
       price: self.price,
       transaction: self.our_transaction,
-      product: self.our_product
+      product: self.our_product,
+      total: self.total
     }
+  end
+
+  def total
+    (quantity * price) - discount
   end
 end

@@ -19,6 +19,8 @@ class Api::ProductTransacsController < ApplicationController
 
   def destroy
     @product_transac.destroy
+
+    render json: { success: "Success delete transaction" }, status: 200
   end
 
   private

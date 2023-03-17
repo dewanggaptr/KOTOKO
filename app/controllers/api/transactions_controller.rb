@@ -8,7 +8,7 @@ class Api::TransactionsController < ApplicationController
   end
 
   def create
-    @transaction = Transaction.new(transaction_params)
+    @transaction = Transaction.new(cashier_id: @current_user.id)
 
     if @transaction.save
       render json: @transaction.new_attributes, status: 201
@@ -19,6 +19,8 @@ class Api::TransactionsController < ApplicationController
 
   def destroy
     @transaction.destroy
+
+    render json: { success: "Success delete transaction" }, status: 200
   end
 
   private

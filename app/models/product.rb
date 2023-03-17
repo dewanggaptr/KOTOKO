@@ -3,7 +3,7 @@ class Product < ApplicationRecord
   has_many :transactions, through: :our_products, source: :our_transaction
   belongs_to :category
 
-  validates :name, presence: true, length: { maximum: 50 }
+  validates :name, presence: true, length: { maximum: 50 }, uniqueness: true
   validates :description, length: { maximum: 100 }
   validates :price, presence: true
   validates :stock, presence: true
