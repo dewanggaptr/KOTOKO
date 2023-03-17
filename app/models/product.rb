@@ -9,6 +9,8 @@ class Product < ApplicationRecord
   validates :stock, presence: true
   validates :category_id, presence: true
 
+  scope :search_product, ->(name) { where("LOWER(name) LIKE ?", "%#{name}%") if name.present? }
+
   def new_attributes
     {
       id: self.id,

@@ -2,7 +2,8 @@ class Api::ProductTransacsController < ApplicationController
   before_action :set_product_transac, only: :destroy
 
   def index
-    @product_transac = ProductTransac.all
+    # @product_transac = ProductTransac.all
+    @product_transac = Product.find_date(params[:start_date, :end_date])
 
     render json: @product_transac.map { |product_transac| product_transac.new_attributes }
   end

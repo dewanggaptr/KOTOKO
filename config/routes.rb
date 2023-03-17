@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     post "/login", to: "cashiers#login"
     resources :category
     resources :products
+    # get "/search", to: "products#search"
   end
 end

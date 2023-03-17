@@ -7,6 +7,10 @@ class ProductTransac < ApplicationRecord
   validates :price, presence: true
   validates :transaction_id, presence: true
   validates :product_id, presence: true
+
+  # scope :start_date, -> start_date { where("date >= ?", start_date) }
+  # scope :end_date, -> end_date { where("date <= ?", end_date) }
+  scope :find_date, ->(start_date, end_date) { where("date BETWEEN ? AND ?", start_date, end_date) }
   
   def new_attributes
     {
